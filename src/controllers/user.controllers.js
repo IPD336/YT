@@ -8,7 +8,10 @@ const registerUser = asyncHandler(async (req,res)=>{
     //1.get data from body
     //2.check if data is valid/available
     //3.check if user already exist
-    //4.crete and store
+    //4.check for coverImages and avatar
+    //5.upload them to cloudinary
+    //6.create user
+    //7.return res
 
     const {fullName ,username , email , password } = req.body
     if(!email || !fullName || !username || !password){
