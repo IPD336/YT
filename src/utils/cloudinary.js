@@ -18,7 +18,10 @@ const uploadOnCloudinary = async function (localFilePath) {
             resource_type : "auto"
         })
         // file uploaded successfully
-        console.log("file uploded ",response, "Url: ", response.url);
+        // console.log("file uploded ",response, "Url: ", response.url); // this gives response which has property : url,id,version,signature, width,height,format,btyes..
+        
+        // now deleting the file that we stored in public/temp
+        fs.unlinkSync(localFilePath)
         return response;
 
     } catch (error) {

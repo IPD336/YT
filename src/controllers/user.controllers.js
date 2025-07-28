@@ -21,10 +21,10 @@ const registerUser = asyncHandler(async (req,res)=>{
     if(existingUser){
         throw new ApiError(409,"User already exist")
     }
-    console.log("req.files!!!! : ",req.files);
+    //console.log("req.files!!!! : ",req.files); // this gives the files that we upload through multer
     
     const avatarLocalPAth = req.files?.avatar[0]?.path;
-    const coverImageLocalPath = req.files?.coverImage[0]?.path
+    const coverImageLocalPath = req?.files?.coverImage?.[0].path
 
     if(!avatarLocalPAth){
         throw new ApiError(400,"Avatar is required")
