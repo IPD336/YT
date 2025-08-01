@@ -294,4 +294,5 @@ export {
   UpdateUserDetails,
   updateUserAvatar,
   updateUserCoverImage,
+  generateAccessAndRefreshToken
 };
