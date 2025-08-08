@@ -8,6 +8,8 @@ import {
   UpdateUserDetails,
   updateUserAvatar,
   updateUserCoverImage,
+  getUserChannelProfile,
+  getWatchHistory,
 } from "../controllers/user.controllers.js";
 import { upload } from "../middleware/multer.middleware.js";
 import { verifyJwt } from "../middleware/auth.middleware.js";
@@ -31,17 +33,21 @@ router.route("/register").post(
 );
 
 router.route("/login").post(loginUser);
+
+// secured routes (middleware)
 router.route("/logout").post(verifyJwt, logoutUser);
-router.route("/getMe").post(verifyJwt, getCurrentUser);
+router.route("/getMe").get(verifyJwt, getCurrentUser);
 router.route("/change-password").post(verifyJwt, changeCurrentPassword);
 
-router.route("/update-user").post(verifyJwt, UpdateUserDetails);
+router.route("/update-user").patch(verifyJwt, UpdateUserDetails);
 router
   .route("/update-avatar")
-  .post(verifyJwt, upload.single("avatar"), updateUserAvatar);
+  .patch(verifyJwt, upload.single("avatar"), updateUserAvatar);
 
 router
   .route("/update-coverImg")
-  .post(verifyJwt, upload.single("coverImage"), updateUserCoverImage);
+  .patch(verifyJwt, upload.single("coverImage"), updateUserCoverImage);
 
+router.route("/c/:username").get(verifyJwt, getUserChannelProfile);
+router.route("/history").get(verifyJwt, getWatchHistory);
 export default router;
